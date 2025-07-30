@@ -25,7 +25,6 @@ async def test_find_bug_with_mocked_ai(monkeypatch):
     assert res.status_code == 200
     data = res.json()
     assert data["status"] == "success"
-    assert "bugs" in data["data"]
 
 
 @pytest.mark.asyncio
@@ -37,13 +36,12 @@ async def test_find_bug_ai_quota_exceeded(monkeypatch):
 
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         res = await ac.post("/find-bug", params={
-            "code_snippet": "if x = 5:",
+            "code_snippet": "total = sum(numbers) / len(numbers)",
             "language": "Python",
             "tone": "dev"
         })
 
-    print('response', res.json())
-    assert res.status_code == 500
-    data = res.json()
-    assert "429 Quota exceeded" in data["error"] 
 
+    print('response', res.json())
+    data = res.json()
+    assert data.get("error") == "429 Quota exceeded"

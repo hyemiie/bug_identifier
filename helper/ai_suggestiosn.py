@@ -37,7 +37,7 @@ Skip extra details or long best practices.
 """
 
     try:
-            model = genai.GenerativeModel("gemini-1.5-flash")  
+            model = genai.GenerativeModel("gemini-2.5-flash")  
             response = model.generate_content(prompt)
             raw_text = response.text.strip()
 
@@ -45,13 +45,16 @@ Skip extra details or long best practices.
             cleaned = re.sub(r"\s*```", "", cleaned)
 
             data = json.loads(cleaned)
-            return BugResponse(data)
-  
+            return data
+
     except Exception as e:
+        error_message = str(e).lower()
+        error_code = "AI_QUOTA_EXCEEDED" if "429" in error_message or "quota" in error_message else "AI_FAILURE"
         return JSONResponse(
         status_code=500,
         content={
             "status": "error",
+            "code": error_code,
             "message": f"AI request failed: {str(e)}"
         }
     )
