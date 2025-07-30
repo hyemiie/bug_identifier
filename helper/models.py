@@ -8,3 +8,8 @@ class BugResponse(BaseModel):
     description: str
     suggestion: Optional[str] = None
 
+
+class BugRequest(BaseModel):
+   code_snippet: str
+   language: str
+   tone: Optional[str] = "dev"

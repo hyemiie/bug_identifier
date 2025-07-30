@@ -16,7 +16,6 @@ genai.configure(api_key= GEMINI_API_KEY)
 
 
 def get_ai_suggestion(code_snippet: str, language : str, tone: str):
-    print("ai called")
     prompt = f"""
 Code to analyze:
 {code_snippet}, {language}

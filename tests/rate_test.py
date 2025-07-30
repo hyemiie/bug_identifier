@@ -26,6 +26,5 @@ async def test_rate_limit_triggered(monkeypatch):
                 break
             
         response = await ac.post("/find-bug", params=payload)  
-        print('Final response:', response.status_code, response.text)
         assert response.status_code == 429
         assert "rate limit exceeded" in response.text.lower()

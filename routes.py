@@ -2,23 +2,27 @@ from typing import Optional
 from fastapi import APIRouter, Request
 from helper.core import receive_code_snippet
 from starlette.responses import JSONResponse
-from config.config import limiter  
+from config.config import limiter
+from helper.models import BugRequest  
 
 router = APIRouter()
 
 @router.post("/find-bug")
 @limiter.limit("10/minute") 
-async def find_bug(request: Request, code_snippet: str, language: str, tone:Optional[str]):
+async def find_bug(request: Request, bug_request: BugRequest):
     try:
-        if tone.lower !=  "dev" or "casual":
-            tone = "dev"
+        if bug_request.tone.lower !=  "dev" or "casual":
+            bug_request.tone = "dev"
         #     return JSONResponse(
         #     status_code=422,
         #     content="Please choose either dev or casual for the tone input"
         # )
+        code_response = await receive_code_snippet(
+                code_snippet=bug_request.code_snippet, 
+                language=bug_request.language, 
+                tone=bug_request.tone
+            )
 
-
-        code_response = await receive_code_snippet(code_snippet=code_snippet, language=language, tone=tone)
         print('response', code_response)
         return {"status": "success", "data": code_response}
     

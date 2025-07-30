@@ -21,7 +21,6 @@ async def test_find_bug_with_mocked_ai(monkeypatch):
             "tone": "dev"
         })
 
-    print('response', res.json())
     assert res.status_code == 200
     data = res.json()
     assert data["status"] == "success"

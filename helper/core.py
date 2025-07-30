@@ -19,7 +19,6 @@ async def receive_code_snippet(code_snippet: str, language: str, tone: str):
     
     snippet_length = await check_code_length(snippet= code_snippet)
     if snippet_length == False:
-        print("checked")
         raise HTTPException(status_code=400, detail="Snippet length's greater than 30")
     
     has_error, error_message = check_syntax_errors(code=code_snippet, language=language)
