@@ -1,0 +1,11 @@
+fastapi==0.116.1
+httpx==0.28.1
+protobuf==4.25.3
+pydantic==2.11.7
+pytest==8.3.3
+python-dotenv==1.1.1
+slowapi
+starlette==0.47.2
+uvicorn==0.35.0
+google-generativeai
+pyparsing>=3.0.0
