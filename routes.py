@@ -23,7 +23,6 @@ async def find_bug(request: Request, bug_request: BugRequest):
                 tone=bug_request.tone
             )
 
-        print('response', code_response)
         return {"status": "success", "data": code_response}
     
     except Exception as e:
