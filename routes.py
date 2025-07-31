@@ -11,8 +11,9 @@ router = APIRouter()
 @limiter.limit("10/minute") 
 async def find_bug(request: Request, bug_request: BugRequest):
     try:
-        if bug_request.tone.lower !=  "dev" or "casual":
+        if bug_request.tone.lower() not in ("dev", "casual"):
             bug_request.tone = "dev"
+
         #     return JSONResponse(
         #     status_code=422,
         #     content="Please choose either dev or casual for the tone input"

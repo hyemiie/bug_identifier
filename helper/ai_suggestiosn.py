@@ -16,10 +16,14 @@ genai.configure(api_key= GEMINI_API_KEY)
 
 
 def get_ai_suggestion(code_snippet: str, language : str, tone: str):
+    
     prompt = f"""
-Code to analyze:
-{code_snippet} 
-You are an expert code reviewer and security researcher. Analyze this {language} code snippet for bugs using this {tone}.
+You are an expert {language} code reviewer and security researcher.
+
+Analyze the following {language} code for bugs using a {tone} tone:
+
+
+{code_snippet}
 
 Instructions:
 1. Identify the bugs or issues in this code

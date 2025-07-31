@@ -39,8 +39,5 @@ async def test_find_bug_ai_quota_exceeded(monkeypatch):
             "language": "Python",
             "tone": "dev"
         })
-
-
-    print('response', res.json())
     data = res.json()
     assert data.get("error") == "429 Quota exceeded"
