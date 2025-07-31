@@ -10,7 +10,6 @@ async def check_code_length(snippet: str) -> bool:
 
 
 async def receive_code_snippet(code_snippet: str, language: str, tone: str):
-    print('snippet received')
     if not code_snippet or not isinstance(code_snippet, str) or code_snippet.strip() == "":
         raise HTTPException(status_code=400, detail="No valid snippet was provided, please try again")
     

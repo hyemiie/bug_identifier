@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, HTTPException, Request
 from helper.core import receive_code_snippet
 from starlette.responses import JSONResponse
 from config.config import limiter
@@ -25,13 +25,15 @@ async def find_bug(request: Request, bug_request: BugRequest):
             )
 
         return {"status": "success", "data": code_response}
-    
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
         print(f"Error occurred: {e}")
         return JSONResponse(
             status_code=500,
             content={"error": str(e)}
         )
+    
    
 
 sample_snippets = [
