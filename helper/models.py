@@ -7,6 +7,7 @@ class BugResponse(BaseModel):
     bug_type: str
     description: str
     suggestion: Optional[str] = None
+    corrected_code: Optional[str] = None 
 
 
 class BugRequest(BaseModel):
