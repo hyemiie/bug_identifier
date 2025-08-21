@@ -74,3 +74,9 @@ async def get_sample_cases():
             })
 
     return results
+
+
+
+@router.get("/health")
+async def health():
+    return {"status": "ok"}
